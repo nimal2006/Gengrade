@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GEN GRADE — Learn. Skill. Launch.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#050d1a;
+  --accent1:#00ffe7;
+  --accent2:#7c3aed;
+  --text:#e5eeff;
+  --muted:#94a3b8;
+  --radius:16px;
+  font-family:'Inter',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth;}
+body{
+  background:radial-gradient(circle at 20% 20%,#0a1832,#050d1a 70%);
+  color:var(--text);
+  overflow:auto;
+}
+
+/* Header */
+header{
+  position:sticky;top:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 8%;
+  background:rgba(10,10,30,0.6);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 0 10px rgba(0,255,255,0.1);
+  animation:glow 8s infinite alternate ease-in-out;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  transition: .3s;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: var(--accent1);
+  text-shadow: 0 0 10px var(--accent1);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search {
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.search:hover {
+  color: var(--accent1);
+}
+@keyframes glow{
+  0%{box-shadow:0 0 10px rgba(0,255,255,0.2);}
+  100%{box-shadow:0 0 25px rgba(124,58,237,0.4);}
+}
+
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-weight:800;font-size:22px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;color:transparent;
+  letter-spacing:1px;
+}
+.logo-symbol{
+  width:34px;height:34px;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--accent1),var(--accent2),var(--accent1));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 20px rgba(0,255,255,0.5);
+  animation:spinGlow 5s linear infinite;
+}
+.logo-symbol span{
+  font-size:18px;
+  color:#01060e;
+  font-weight:900;
+}
+@keyframes spinGlow{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+
+
+/* Animated Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8%;
+  position: relative;
+  overflow: hidden;
+  perspective: 1000px;
+  background: radial-gradient(circle at 20% 20%, #0a1832, #050d1a 70%);
+  text-align: center;
+}
+
+.hero-logo {
+  margin-bottom: 20px;
+}
+
+.hero h2 {
+  margin-bottom: 40px;
+}
+
+.hero p {
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+
+.hero .btn {
+  margin-bottom: 60px;
+}
+
+.team-section {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.team-section h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent1),
+    transparent 20%,
+    var(--accent2),
+    transparent 40%,
+    var(--accent1),
+    transparent 60%,
+    var(--accent2),
+    transparent 80%,
+    var(--accent1)
+  );
+  opacity: 0.08;
+  animation: swirl 20s linear infinite;
+  filter: blur(120px);
+}
+.hero::after {
+  animation-delay: -10s;
+  opacity: 0.12;
+}
+@keyframes swirl {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(360deg) scale(1.05); }
+}
+
+/* Animated GEN GRADE logo */
+.hero-logo {
+  position: relative;
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: logoPulse 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 30px rgba(0,255,255,0.3);
+}
+.hero-logo::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  animation: flow 3s infinite linear;
+}
+
+/* Animated slogan */
+.hero h2 {
+  margin-top: 12px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: logoPulse 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 30px rgba(0,255,255,0.3);
+}
+
+@keyframes logoPulse {
+  0% { text-shadow: 0 0 10px rgba(0,255,255,0.3); }
+  100% { text-shadow: 0 0 30px rgba(124,58,237,0.7); }
+}
+@keyframes flow {
+  0% { width:10%; opacity:0.3; }
+  50% { width:60%; opacity:1; }
+  100% { width:10%; opacity:0.3; }
+}
+
+.hero p {
+  max-width:700px;margin:18px auto;color:var(--muted);
+  font-size:1.05rem;opacity:0;transform:translateY(40px);
+  animation:fadeUp 1.8s ease forwards;
+}
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+.btn {
+  margin-top:20px;padding:14px 36px;border-radius:var(--radius);
+  font-weight:700;border:none;cursor:pointer;
+  background:linear-gradient(90deg,var(--accent2),var(--accent1));
+  color:#01060e;
+  box-shadow:0 0 20px rgba(0,255,255,0.4);
+  transition:all .4s ease;
+  animation:fadeUp 2.2s ease forwards,glowPulse 2.5s infinite alternate;
+}
+@keyframes glowPulse {
+  0% { box-shadow:0 0 10px rgba(0,255,255,0.2); transform:scale(1); }
+  100% { box-shadow:0 0 30px rgba(0,255,255,0.6); transform:scale(1.05); }
+}
+.btn:hover { transform:translateY(-4px) scale(1.08); }
+
+/* Sections */
+section{padding:100px 8%;text-align:center;position:relative;overflow:hidden;display:none;}
+section.logged-in{display:block;}
+section h2{
+  font-size:2.2rem;font-weight:800;margin-bottom:16px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;color:transparent;
+  transform:translateY(50px);opacity:0;transition:all 1s ease;
+}
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;margin-top:40px;opacity:0;transform:translateY(60px);transition:all 1s ease;
+}
+section.visible h2,section.visible .card-grid{opacity:1;transform:translateY(0);}
+.card{
+  padding:28px;border-radius:var(--radius);
+  background:rgba(255,255,255,0.06);
+  box-shadow:0 0 20px rgba(0,255,255,0.05);
+  backdrop-filter:blur(10px);
+  transition:transform .6s,box-shadow .6s;
+  animation:float 6s ease-in-out infinite;
+}
+.card:hover{transform:perspective(600px) rotateY(8deg) translateY(-6px);box-shadow:0 0 35px rgba(124,58,237,0.3);}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.card h3{margin-bottom:8px;color:var(--accent1);}
+.card p{color:var(--muted);font-size:14px;}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(5, 13, 26, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  background: rgba(10, 24, 50, 0.95);
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 255, 231, 0.3);
+  box-shadow: 0 0 50px rgba(0, 255, 231, 0.3);
+  width: 90%;
+  max-width: 400px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.close {
+  color: var(--muted);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: var(--accent1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0, 255, 231, 0.3);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent1);
+  box-shadow: 0 0 20px rgba(0, 255, 231, 0.3);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  color: #01060e;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 255, 231, 0.4);
+}
+
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: var(--radius);
+  text-align: center;
+  font-weight: 600;
+}
+
+.message.success {
+  background: rgba(0, 255, 231, 0.1);
+  color: var(--accent1);
+  border: 1px solid var(--accent1);
+}
+
+.message.error {
+  background: rgba(255, 100, 100, 0.1);
+  color: #ff6464;
+  border: 1px solid #ff6464;
+}
+
+.switch-form {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--muted);
+}
+
+.switch-form a {
+  color: var(--accent1);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.switch-form a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer{text-align:center;padding:40px 8%;background:rgba(255,255,255,0.02);color:var(--muted);position:relative;}
+footer::after{
+  content:"";position:absolute;bottom:0;left:50%;
+  width:60%;height:2px;transform:translateX(-50%);
+  background:linear-gradient(90deg,var(--accent2),var(--accent1));
+  box-shadow:0 0 20px rgba(0,255,255,0.4);
+  animation:flow 3s infinite linear;
+}
+
+/* Detail Modal */
+.detail-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(5, 13, 26, 0.9);
+  backdrop-filter: blur(15px);
+}
+
+.detail-modal-content {
+  background: rgba(10, 24, 50, 0.95);
+  margin: 5% auto;
+  padding: 40px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 255, 231, 0.3);
+  box-shadow: 0 0 50px rgba(0, 255, 231, 0.3);
+  width: 90%;
+  max-width: 800px;
+  animation: modalFadeIn 0.3s ease-out;
+  text-align: left;
+}
+
+.detail-modal-content h2 {
+  color: var(--accent1);
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.detail-modal-content p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.detail-modal-content ul {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-left: 20px;
+}
+
+.detail-modal-content .btn {
+  margin-top: 30px;
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-symbol"><span>G</span></div> GenGrade
+  </div>
+
+  <div class="header-right">
+    <span class="search"></span>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-logo">GEN GRADE</div>
+  <h2>WHY GENGRADE ?</h2>
+  <p>All-in-one platform to learn, skill up, and prepare for placements — fast, focused, and futuristic.</p>
+  <p class="hero-description">In today's rapidly evolving tech landscape, traditional education often falls short in preparing students for real-world challenges. GEN GRADE bridges this gap by offering cutting-edge courses, hands-on projects, and personalized career guidance to empower the next generation of innovators and ensure they are job-ready from day one.</p>
+  <button class="btn" onclick="startNow()">Start Now</button>
+  <div class="team-section">
+    <h3>Our Team</h3>
+    <div class="team-list" style="max-width:1000px;margin:18px auto 0;">
+      <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+        <div class="card team-card" style="display:flex;align-items:center;gap:16px;">
+          <div class="logo-symbol" style="width:64px;height:64px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;font-size:22px;">
+            <span style="color:#fff;font-weight:900">N</span>
+          </div>
+          <div style="text-align:left">
+            <div style="font-weight:800;font-size:18px;letter-spacing:1.4px">NANDHISH V S</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:4px"><BE class="TECH"></BE></div>
+          </div>
+        </div>
+
+        <div class="card team-card" style="display:flex;align-items:center;gap:16px;">
+          <div class="logo-symbol" style="width:64px;height:64px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;font-size:22px;">
+            <span style="color:#fff;font-weight:900">N</span>
+          </div>
+          <div style="text-align:left">
+            <div style="font-weight:800;font-size:18px;letter-spacing:1.4px">NIMAL M</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:4px"><BE class="TECH"></BE></div>
+          </div>
+        </div>
+
+        <div class="card team-card" style="display:flex;align-items:center;gap:16px;">
+          <div class="logo-symbol" style="width:64px;height:64px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;font-size:22px;">
+            <span style="color:#fff;font-weight:900">N</span>
+          </div>
+          <div style="text-align:left">
+            <div style="font-weight:800;font-size:18px;letter-spacing:1.4px">NITHYASHREE GV</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:4px"><BE class="TECH"></BE></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="learn">
+  <h2>Learn Emerging Tech</h2>
+  <div class="card-grid">
+    <div class="card"><h3>Generative AI</h3><p>Build AI-powered tools and chatbots using cutting-edge GenAI models.</p></div>
+    <div class="card"><h3>Quantum Computing in Cybersecurity</h3><p>Apply quantum computing principles to enhance cybersecurity measures and protect against quantum threats.</p></div>
+    <div class="card"><h3>Cybersecurity</h3><p>Protect digital ecosystems from modern threats.</p></div>
+    <div class="card"><h3>Web3 & Blockchain</h3><p>Learn decentralized apps, crypto wallets, and smart contracts.</p></div>
+    <div class="card"><h3>AR & VR</h3><p>Design immersive experiences blending real and virtual worlds.</p></div>
+    <!-- Additional subtopics below -->
+    <div class="card"><h3>Data Science Foundations</h3><p>Master data analysis, visualization, and statistics for real-world insights.</p></div>
+    <div class="card"><h3>Machine Learning</h3><p>Learn algorithms, model building, and deployment for intelligent systems.</p></div>
+    <div class="card"><h3>Deep Learning</h3><p>Explore neural networks, computer vision, and natural language processing.</p></div>
+    <div class="card"><h3>Cloud Computing</h3><p>Understand cloud platforms, architecture, and scalable deployments.</p></div>
+    <div class="card"><h3>DevOps</h3><p>Automate software delivery, CI/CD, and infrastructure management.</p></div>
+    <div class="card"><h3>Software Testing</h3><p>Ensure quality with manual, automated, and continuous testing strategies.</p></div>
+    <div class="card"><h3>Ethical Hacking</h3><p>Learn penetration testing, vulnerability assessment, and cyber defense.</p></div>
+    <div class="card"><h3>Mobile App Development</h3><p>Build cross-platform mobile apps for Android and iOS using modern frameworks.</p></div>
+    <div class="card"><h3>Edge Computing</h3><p>Process data closer to the source for faster, real-time insights.</p></div>
+    <div class="card"><h3>Robotics & Automation</h3><p>Design and program intelligent robots for industry and research.</p></div>
+    <div class="card"><h3>Internet of Things (IoT)</h3><p>Connect devices and sensors to build smart environments.</p></div>
+    <div class="card"><h3>Natural Language Processing</h3><p>Analyze and generate human language using AI techniques.</p></div>
+    <div class="card"><h3>Computer Vision</h3><p>Enable machines to interpret and understand visual information.</p></div>
+    <div class="card"><h3>Game Development</h3><p>Create interactive games using modern engines and frameworks.</p></div>
+    <div class="card"><h3>Embedded Systems</h3><p>Develop software for hardware devices and microcontrollers.</p></div>
+    <div class="card"><h3>Data Engineering</h3><p>Build scalable data pipelines and manage big data infrastructure.</p></div>
+    <div class="card"><h3>UI/UX Design</h3><p>Design user interfaces and experiences for digital products.</p></div>
+    <div class="card"><h3>Big Data Analytics</h3><p>Analyze massive datasets to uncover actionable insights.</p></div>
+    <div class="card"><h3>Digital Marketing</h3><p>Leverage digital channels to grow brands and products.</p></div>
+    <div class="card"><h3>FinTech</h3><p>Innovate in financial technology, payments, and banking solutions.</p></div>
+    <div class="card"><h3>HealthTech</h3><p>Apply technology to healthcare for better patient outcomes.</p></div>
+    <div class="card"><h3>Green Tech</h3><p>Develop sustainable technologies for a cleaner future.</p></div>
+    <div class="card"><h3>Smart Cities</h3><p>Integrate technology to create efficient, livable urban spaces.</p></div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Build Practical Skills</h2>
+  <div class="card-grid">
+    <div class="card"><h3>Projects</h3><p>Apply learning through guided mini-projects.</p></div>
+    <div class="card"><h3>Mentorship</h3><p>Get insights from experts across industries.</p></div>
+    <div class="card"><h3>Analytics</h3><p>Track your progress and skill readiness visually.</p></div>
+    <div class="card"><h3>C++</h3><p>Develop high-performance applications and systems.</p></div>
+    <div class="card"><h3>Java</h3><p>Build scalable enterprise and mobile applications.</p></div>
+    <div class="card"><h3>PHP</h3><p>Create dynamic web applications and backend services.</p></div>
+    <div class="card"><h3>SQL</h3><p>Manage and query relational databases efficiently.</p></div>
+    <div class="card"><h3>AWS</h3><p>Deploy and manage cloud infrastructure using Amazon Web Services.</p></div>
+    <div class="card"><h3>Google Cloud</h3><p>Leverage Google Cloud Platform for scalable solutions.</p></div>
+    <div class="card"><h3>Figma</h3><p>Design and prototype user interfaces collaboratively.</p></div>
+    <div class="card"><h3>Unity/Unreal</h3><p>Develop 2D/3D games and simulations.</p></div>
+    <div class="card"><h3>Docker/Kubernetes</h3><p>Containerize and orchestrate applications for scalability.</p></div>
+    <div class="card"><h3>Agile/Scrum</h3><p>Master modern software development methodologies.</p></div>
+    <div class="card"><h3>Git/GitHub</h3><p>Version control and collaborate on code projects.</p></div>
+    <div class="card"><h3>API Development</h3><p>Design and build robust APIs for web and mobile apps.</p></div>
+    <div class="card"><h3>Microservices</h3><p>Architect distributed systems for flexibility and scale.</p></div>
+    <div class="card"><h3>Testing Automation</h3><p>Automate software testing for reliability and speed.</p></div>
+    <div class="card"><h3>Technical Writing</h3><p>Communicate complex ideas clearly and effectively.</p></div>
+  </div>
+</section>
+
+<section id="career">
+  <h2>Launch Your Career</h2>
+
+  <!-- Personalized Career Assessment -->
+  <div style="text-align: left; max-width: 800px; margin: 0 auto 60px; padding: 30px; background: rgba(255,255,255,0.06); border-radius: var(--radius); backdrop-filter: blur(10px);">
+    <h3 style="color: var(--accent1); margin-bottom: 20px; text-align: center;">Your Career Profile & Recommendations</h3>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+      <div>
+        <h4 style="color: var(--accent1); margin-bottom: 10px;">📚 Knowledge Areas</h4>
+        <ul style="color: var(--muted); line-height: 1.6;">
+          <li><strong>Technical Skills:</strong> Python, JavaScript, React, Node.js</li>
+          <li><strong>Domains:</strong> Web Development, AI/ML, Cloud Computing</li>
+          <li><strong>Certifications:</strong> AWS Certified, Google Cloud Professional</li>
+          <li><strong>Projects:</strong> 15+ completed projects on GitHub</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color: var(--accent1); margin-bottom: 10px;">🎯 Recommended Career Paths</h4>
+        <ul style="color: var(--muted); line-height: 1.6;">
+          <li><strong>Primary:</strong> Full Stack Developer</li>
+          <li><strong>Secondary:</strong> Cloud Solutions Architect</li>
+          <li><strong>Emerging:</strong> AI/ML Engineer</li>
+          <li><strong>Salary Range:</strong> $85K - $150K annually</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background: rgba(0,255,231,0.1); padding: 20px; border-radius: var(--radius); border-left: 4px solid var(--accent1);">
+      <h4 style="color: var(--accent1); margin-bottom: 10px;">💼 Job Match Analysis</h4>
+      <p style="color: var(--muted); margin: 0;">
+        Based on your skills and completed courses, you're a strong match for <strong>Senior Developer</strong> roles.
+        Your React and Node.js expertise makes you ideal for full-stack positions, while your cloud certifications
+        open doors to DevOps and cloud architecture roles. Consider specializing in AI/ML for higher earning potential.
+      </p>
+    </div>
+  </div>
+
+  <!-- Company Placements -->
+  <h3 style="color: var(--accent1); margin-bottom: 30px;">Available Placement Opportunities</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Google</h3>
+      <p>Software Engineer - 15 slots available<br>Frontend Developer - 8 slots available<br>AI/ML Engineer - 12 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Microsoft</h3>
+      <p>Full Stack Developer - 20 slots available<br>Cloud Engineer - 10 slots available<br>Data Scientist - 6 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Amazon</h3>
+      <p>DevOps Engineer - 18 slots available<br>Security Analyst - 9 slots available<br>Product Manager - 7 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Meta</h3>
+      <p>Backend Developer - 14 slots available<br>UI/UX Designer - 5 slots available<br>Blockchain Developer - 4 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Netflix</h3>
+      <p>Software Architect - 6 slots available<br>Mobile App Developer - 11 slots available<br>System Engineer - 8 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Apple</h3>
+      <p>iOS Developer - 13 slots available<br>Hardware Engineer - 7 slots available<br>AR/VR Specialist - 5 slots available</p>
+    </div>
+    <!-- Additional company cards below -->
+    <div class="card">
+      <h3>Tesla</h3>
+      <p>Autopilot Engineer - 5 slots available<br>Battery Systems Analyst - 4 slots available<br>Software Developer - 7 slots available</p>
+    </div>
+    <div class="card">
+      <h3>IBM</h3>
+      <p>Cloud Solutions Architect - 8 slots available<br>AI Researcher - 6 slots available<br>DevOps Engineer - 10 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Oracle</h3>
+      <p>Database Administrator - 9 slots available<br>Cloud Engineer - 7 slots available<br>Java Developer - 12 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Zoho</h3>
+      <p>Product Developer - 15 slots available<br>QA Engineer - 8 slots available<br>Mobile App Developer - 10 slots available</p>
+    </div>
+    <div class="card">
+      <h3>TCS</h3>
+      <p>Software Engineer - 20 slots available<br>Business Analyst - 9 slots available<br>Cloud Consultant - 6 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Infosys</h3>
+      <p>Full Stack Developer - 18 slots available<br>Testing Engineer - 11 slots available<br>Data Analyst - 7 slots available</p>
+    </div>
+    <div class="card">
+      <h3>Accenture</h3>
+      <p>Technology Analyst - 14 slots available<br>DevOps Specialist - 8 slots available<br>Security Consultant - 5 slots available</p>
+    </div>
+    <div class="card"><h3>Google DeepMind</h3><p>AI Researcher - 6 slots available<br>ML Engineer - 8 slots available</p></div>
+    <div class="card"><h3>SpaceX</h3><p>Aerospace Software - 4 slots available<br>Data Analyst - 5 slots available</p></div>
+    <div class="card"><h3>Siemens</h3><p>Automation Engineer - 7 slots available<br>IoT Specialist - 6 slots available</p></div>
+    <div class="card"><h3>Deloitte</h3><p>Consultant - 10 slots available<br>Data Scientist - 8 slots available</p></div>
+    <div class="card"><h3>Capgemini</h3><p>Cloud Architect - 9 slots available<br>DevOps - 7 slots available</p></div>
+    <div class="card"><h3>Wipro</h3><p>Software Developer - 12 slots available<br>QA Analyst - 6 slots available</p></div>
+    <div class="card"><h3>HCL</h3><p>Cybersecurity Analyst - 8 slots available<br>Network Engineer - 7 slots available</p></div>
+    <div class="card"><h3>PayPal</h3><p>FinTech Developer - 5 slots available<br>Security Engineer - 4 slots available</p></div>
+    <div class="card"><h3>Flipkart</h3><p>E-commerce Developer - 10 slots available<br>Data Engineer - 6 slots available</p></div>
+    <div class="card"><h3>Byju's</h3><p>EdTech Developer - 7 slots available<br>Content Engineer - 5 slots available</p></div>
+    <div class="card"><h3>Mindtree</h3><p>Full Stack Developer - 8 slots available<br>Cloud Engineer - 6 slots available</p></div>
+    <div class="card"><h3>Cognizant</h3><p>Business Analyst - 9 slots available<br>Solution Architect - 7 slots available</p></div>
+    <div class="card"><h3>L&T Infotech</h3><p>Embedded Systems - 5 slots available<br>IoT Developer - 4 slots available</p></div>
+    <div class="card"><h3>Freshworks</h3><p>Product Manager - 6 slots available<br>API Developer - 5 slots available</p></div>
+    <div class="card"><h3>Ola</h3><p>Mobile App Developer - 8 slots available<br>Data Scientist - 6 slots available</p></div>
+  </div>
+</section>
+
+
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('loginModal')">&times;</span>
+    <h2 style="color: var(--accent1); margin-bottom: 20px;">Login to GEN GRADE</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required>
+      </div>
+      <button type="submit" class="btn-primary">Login</button>
+    </form>
+    <div id="loginMessage" class="message" style="display: none;"></div>
+    <div class="switch-form">
+      Don't have an account? <a href="#" onclick="switchToSignup()">Sign up here</a>
+    </div>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('signupModal')">&times;</span>
+    <h2 style="color: var(--accent1); margin-bottom: 20px;">Join GEN GRADE</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="signupName">Name</label>
+        <input type="text" id="signupName" required>
+      </div>
+      <div class="form-group">
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" required minlength="6">
+      </div>
+      <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+    <div id="signupMessage" class="message" style="display: none;"></div>
+    <div class="switch-form">
+      Already have an account? <a href="#" onclick="switchToLogin()">Login here</a>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div id="detailModal" class="detail-modal">
+  <div class="detail-modal-content">
+    <span class="close" onclick="closeModal('detailModal')">&times;</span>
+    <h2 id="detailTitle">Detail Title</h2>
+    <p id="detailDescription">Detail description will appear here.</p>
+    <div id="detailContent">
+      <!-- Additional content will be populated here -->
+    </div>
+    <button class="btn" onclick="closeModal('detailModal')">Close</button>
+  </div>
+</div>
+
+<footer>© 2025 GEN GRADE | Designed for Student Success 🚀</footer>
+
+<script>
+// Reveal sections on scroll
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+},{threshold:0.2});
+sections.forEach(s=>observer.observe(s));
+
+// Subtle parallax background effect
+document.addEventListener('mousemove', e => {
+  const hero = document.querySelector('.hero');
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  hero.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
+});
+
+// Modal functions
+function openModal(modalId) {
+  document.getElementById(modalId).style.display = 'block';
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+  // Clear messages and forms
+  const message = document.getElementById(modalId.replace('Modal', 'Message'));
+  const form = document.getElementById(modalId.replace('Modal', 'Form'));
+  if (message) message.style.display = 'none';
+  if (form) form.reset();
+}
+
+function switchToSignup() {
+  closeModal('loginModal');
+  openModal('signupModal');
+}
+
+function switchToLogin() {
+  closeModal('signupModal');
+  openModal('loginModal');
+}
+
+// Event listeners for buttons
+document.getElementById('loginBtn').addEventListener('click', () => openModal('loginModal'));
+document.getElementById('signupBtn').addEventListener('click', () => openModal('signupModal'));
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = 'none';
+  }
+}
+
+// API functions
+async function loginUser(email, password) {
+  try {
+    const response = await fetch('http://127.0.0.1:5001/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    return await response.json();
+  } catch (error) {
+    return { error: 'Network error. Please try again.' };
+  }
+}
+
+async function signupUser(name, email, password) {
+  try {
+    const response = await fetch('http://127.0.0.1:5001/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+    return await response.json();
+  } catch (error) {
+    return { error: 'Network error. Please try again.' };
+  }
+}
+
+// Form handlers
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+
+  const result = await loginUser(email, password);
+  const messageDiv = document.getElementById('loginMessage');
+
+  if (result.message) {
+    messageDiv.textContent = `Welcome back, ${result.user.name}!`;
+    messageDiv.className = 'message success';
+    messageDiv.style.display = 'block';
+    setTimeout(() => {
+      closeModal('loginModal');
+      // Show the main content sections after login
+      document.getElementById('learn').classList.add('logged-in');
+      document.getElementById('skills').classList.add('logged-in');
+      document.getElementById('career').classList.add('logged-in');
+    }, 2000);
+  } else {
+    messageDiv.textContent = result.error;
+    messageDiv.className = 'message error';
+    messageDiv.style.display = 'block';
+  }
+});
+
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+
+  const result = await signupUser(name, email, password);
+  const messageDiv = document.getElementById('signupMessage');
+
+  if (result.message) {
+    messageDiv.textContent = 'Account created successfully! You can now login.';
+    messageDiv.className = 'message success';
+    messageDiv.style.display = 'block';
+    setTimeout(() => {
+      switchToLogin();
+    }, 2000);
+  } else {
+    messageDiv.textContent = result.error;
+    messageDiv.className = 'message error';
+    messageDiv.style.display = 'block';
+  }
+});
+
+// Card click handlers for detail modals
+document.addEventListener('DOMContentLoaded', () => {
+  // Add click event listeners to all cards
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = card.querySelector('h3').textContent;
+      showDetailModal(title);
+    });
+  });
+});
+
+function showDetailModal(title) {
+  const detailData = getDetailData(title);
+  document.getElementById('detailTitle').textContent = detailData.title;
+  document.getElementById('detailDescription').textContent = detailData.description;
+  document.getElementById('detailContent').innerHTML = detailData.content;
+  openModal('detailModal');
+}
+
+function getDetailData(title) {
+  const details = {
+    "Generative AI": {
+      title: "Generative AI Mastery Program",
+      description: "Master the art of creating AI-powered tools and intelligent chatbots using modern Generative AI models.",
+      content: `
+        <h3>🎯 What You'll Learn</h3>
+        <ul>
+          <li><strong>Foundation:</strong> Transformers, attention, and LLM concepts</li>
+          <li><strong>Practical Skills:</strong> Building chatbots, content generators, and AI assistants</li>
+          <li><strong>Tools:</strong> OpenAI, Hugging Face, LangChain</li>
+        </ul>
+        <h3>📚 Structure</h3>
+        <ul>
+          <li>Module 1: Fundamentals</li>
+          <li>Module 2: Transformers & Fine-tuning</li>
+          <li>Module 3: Production & Safety</li>
+        </ul>
+      `
+    },
+    "Quantum Computing in Cybersecurity": {
+      title: "Quantum Computing in Cybersecurity",
+      description: "Apply quantum principles to strengthen future security and understand quantum threats.",
+      content: `
+        <h3>What You'll Learn</h3>
+        <ul>
+          <li>Quantum threats to classical crypto</li>
+          <li>Post-quantum algorithms and quantum-safe design</li>
+        </ul>
+      `
+    },
+    "Cybersecurity": {
+      title: "Advanced Cybersecurity Program",
+      description: "Protect systems and respond to incidents with practical defensive techniques.",
+      content: `
+        <h3>What You'll Learn</h3>
+        <ul>
+          <li>Threat analysis, network security, and incident response</li>
+          <li>Tools: Wireshark, Metasploit, Nmap</li>
+        </ul>
+      `
+    },
+    "Web3 & Blockchain": {
+      title: "Web3 & Blockchain Development",
+      description: "Build dApps, smart contracts and understand decentralized systems.",
+      content: `
+        <h3>What You'll Learn</h3>
+        <ul>
+          <li>Smart contracts (Solidity), DeFi primitives and tools</li>
+          <li>Web3 integration with frontends and wallets</li>
+        </ul>
+      `
+    },
+    "AR & VR": {
+      title: "AR & VR Experience Design",
+      description: "Create immersive AR/VR experiences using Unity/Unreal and spatial design.",
+      content: `
+        <h3>What You'll Learn</h3>
+        <ul>
+          <li>3D design, ARKit/ARCore, and VR environment creation</li>
+        </ul>
+      `
+    },
+    "Projects": {
+      title: "Hands-on Project Development",
+      description: "Guided projects to build portfolio-ready work.",
+      content: `
+        <h3>Projects</h3>
+        <ul><li>Beginner → Todo apps</li><li>Intermediate → E-commerce</li><li>Advanced → Real-time systems</li></ul>
+      `
+    },
+    "Mentorship": {
+      title: "Expert Mentorship Program",
+      description: "One-on-one guidance from industry practitioners.",
+      content: `<h3>Mentorship</h3><p>Resume reviews, mock interviews and career coaching.</p>`
+    },
+    "Analytics": {
+      title: "Progress Analytics & Insights",
+      description: "Track learning progress, assessments and career readiness.",
+      content: `<h3>Analytics</h3><p>Dashboards with progress charts, skill radars and reports.</p>`
+    },
+    "Google": {
+      title: "Google Career Opportunities",
+      description: "Software, frontend and AI/ML roles at Google.",
+      content: `<h3>Openings</h3><ul><li>Software Engineer</li><li>Frontend Developer</li><li>AI/ML Engineer</li></ul>`
+    },
+    "Microsoft": {
+      title: "Microsoft Career Pathways",
+      description: "Cloud and data roles at Microsoft.",
+      content: `<h3>Openings</h3><ul><li>Full Stack Developer</li><li>Cloud Engineer</li><li>Data Scientist</li></ul>`
+    },
+    "Amazon": {
+      title: "Amazon Technical Roles",
+      description: "DevOps, security and product roles at Amazon.",
+      content: `<h3>Openings</h3><ul><li>DevOps Engineer</li><li>Security Analyst</li><li>Product Manager</li></ul>`
+    },
+    "Meta": {
+      title: "Meta Engineering Careers",
+      description: "Backend, design and blockchain roles at Meta.",
+      content: `<h3>Openings</h3><ul><li>Backend Developer</li><li>UI/UX Designer</li><li>Blockchain Developer</li></ul>`
+    },
+    "Netflix": {
+      title: "Netflix Technology Careers",
+      description: "Engineering and mobile roles at Netflix.",
+      content: `<h3>Openings</h3><ul><li>Software Architect</li><li>Mobile App Developer</li><li>System Engineer</li></ul>`
+    },
+    "Apple": {
+      title: "Apple Innovation Roles",
+      description: "iOS, hardware and AR/VR roles at Apple.",
+      content: `<h3>Openings</h3><ul><li>iOS Developer</li><li>Hardware Engineer</li><li>AR/VR Specialist</li></ul>`
+    }
+  };
+
+  return details[title] || {
+    title: title,
+    description: 'Detailed information coming soon.',
+    content: '<p>Content for this section is being prepared.</p>'
+  };
+}
+
+// Start Now routing: if user already logged in (localStorage), go to dashboard, else go to login
+function startNow() {
+  // Always redirect to login page, with next=/mycourses
+  window.location.href = '/login?next=' + encodeURIComponent('/mycourses');
+}
+</script>
+
+</body>
+</html>

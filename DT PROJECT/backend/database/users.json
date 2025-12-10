@@ -1,0 +1,37 @@
+{
+  "test@example.com": {
+    "email": "test@example.com",
+    "password": "$2b$12$.pfLSfisLiUtPePDjX6xiOietA7wonE1T9FoSdjxZ1Sil2k4s/./W",
+    "name": "Test User",
+    "created_at": "2025-10-29T10:22:46.868167",
+    "last_login": "2025-10-29T10:23:04.023103"
+  },
+  "newuser@example.com": {
+    "email": "newuser@example.com",
+    "password": "$2b$12$EV8XowLQhvVkLFHT1N09geqe3p5xrUPMLGLB4GSjWolCwHnIi6WeK",
+    "name": "New User",
+    "created_at": "2025-10-29T10:25:37.873654",
+    "last_login": "2025-10-29T10:25:48.908199"
+  },
+  "student1@example.com": {
+    "email": "student1@example.com",
+    "password": "$2b$12$rftM7wKCR.Y9JJ9IIARnruwoXHb6LD3pB7HyPiqIqgoQCd5.Mfxdq",
+    "name": "Student 1",
+    "created_at": "2025-01-15T10:00:00.000000",
+    "last_login": "2025-12-04T14:24:29.760012"
+  },
+  "student2@example.com": {
+    "email": "student2@example.com",
+    "password": "$2b$12$cTOtIv5zO3THREy8U8z4buA9964wgpJpfj9RpHVEQX0wkcFUQ4BmK",
+    "name": "Student 2",
+    "created_at": "2025-01-15T10:00:00.000000",
+    "last_login": null
+  },
+  "student3@example.com": {
+    "email": "student3@example.com",
+    "password": "$2b$12$ScI2mFbNLhYJJrudqg2z3ubDZlBAH6P3HotYQ54fEtCYdnPXt2CV.",
+    "name": "Student 3",
+    "created_at": "2025-01-15T10:00:00.000000",
+    "last_login": null
+  }
+}

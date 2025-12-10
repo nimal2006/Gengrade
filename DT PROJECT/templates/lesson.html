@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — GenGrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#071021;--accent:#00ffe7;--muted:#9aa9bd;--text:#e7f2ff}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#061226 0%, #071021 100%);color:var(--text);min-height:100vh}
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 6%}
+    .logo{font-weight:800;font-size:20px;background:linear-gradient(90deg,var(--accent),#7c3aed);-webkit-background-clip:text;color:transparent}
+    main{max-width:900px;margin:34px auto;padding:0 20px}
+    h1{font-size:22px;margin-bottom:6px}
+    .meta{color:var(--muted);margin-bottom:16px}
+    .content{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">GEN GRADE</div>
+    <nav><a href="/mycourses" style="color:var(--muted);text-decoration:none">Dashboard</a></nav>
+  </header>
+
+  <main>
+    <h1 id="title">Lesson</h1>
+    <div class="meta" id="meta">Loading...</div>
+    <div class="content" id="content">Please wait while we load the lesson content.</div>
+  </main>
+
+  <script>
+    if(!localStorage.getItem('gengrade_user')){
+      const next = location.pathname + location.search;
+      location.href = '/login?next=' + encodeURIComponent(next);
+    }
+
+    function qs(name){ return new URLSearchParams(location.search).get(name); }
+    const course = qs('course')||'unknown';
+    const lesson = qs('lesson')||'unknown';
+
+    const fakeContent = `This is a sample lesson page for course '${course}' and lesson '${lesson}'.\n\nYou can replace this with real lesson content or embed videos, quizzes, and code editors.`;
+
+    document.getElementById('title').textContent = `Lesson ${lesson}`;
+    document.getElementById('meta').textContent = `Course: ${course} • Lesson: ${lesson}`;
+    document.getElementById('content').textContent = fakeContent;
+  </script>
+</body>
+</html>

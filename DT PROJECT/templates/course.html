@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course — GenGrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#071021;--accent:#00ffe7;--muted:#9aa9bd;--card:#071631;--text:#e7f2ff}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#061226 0%, #071021 100%);color:var(--text);min-height:100vh}
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 6%}
+    .logo{font-weight:800;font-size:20px;background:linear-gradient(90deg,var(--accent),#7c3aed);-webkit-background-clip:text;color:transparent}
+    main{max-width:1000px;margin:34px auto;padding:0 20px}
+    .hero{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .hero .meta{max-width:680px}
+    h1{font-size:28px;margin-bottom:6px}
+    p.lead{color:var(--muted);margin-bottom:12px}
+    .lessons{margin-top:22px}
+    .lesson{background:rgba(255,255,255,0.03);padding:14px;border-radius:12px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
+    .lesson .left{display:flex;gap:12px;align-items:center}
+    .badge{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .muted{color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">GEN GRADE</div>
+    <nav><a href="/mycourses" style="color:var(--muted);text-decoration:none">Dashboard</a></nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="meta">
+        <h1 id="title">Course</h1>
+        <p class="lead" id="desc">Loading course details…</p>
+        <div class="lessons" id="lessons"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    if(!localStorage.getItem('gengrade_user')){
+      const next = location.pathname + location.search;
+      location.href = '/login?next=' + encodeURIComponent(next);
+    }
+
+    function qs(name){
+      return new URLSearchParams(location.search).get(name);
+    }
+    const courseId = qs('course') || 'unknown';
+
+    const courses = {
+      'genai': {title:'Generative AI Fundamentals', desc:'Intro to prompt engineering, models, and projects.', lessons:[
+        {id:'g1',title:'Intro to GenAI'}, {id:'g2',title:'Prompt Engineering Basics'}, {id:'g3',title:'Mini Project'}
+      ]},
+      'webdev': {title:'Fullstack Web Development', desc:'HTML, CSS, JS and backend basics.', lessons:[{id:'w1',title:'HTML & CSS'},{id:'w2',title:'Interactive JS'},{id:'w3',title:'Backend APIs'}]},
+      'cyber': {title:'Cybersecurity Essentials', desc:'Network basics, threats and defense.', lessons:[{id:'c1',title:'Network Fundamentals'},{id:'c2',title:'Common Attacks'},{id:'c3',title:'Defensive Measures'}]},
+      'placement': {title:'Placement Prep', desc:'Mock tests and interview prep.', lessons:[{id:'p1',title:'Aptitude Practice'},{id:'p2',title:'System Design Basics'}]},
+      'jobalerts': {title:'Job Alerts', desc:'Job recommendation flow', lessons:[{id:'j1',title:'Setup Alerts'}]},
+      'resume': {title:'Resume Boost', desc:'Optimize your resume', lessons:[{id:'r1',title:'Resume Checklist'}]},
+      'deepmind': {title:'Google DeepMind', desc:'AI Researcher, ML Engineer roles.', lessons:[{id:'dm1',title:'AI Researcher'},{id:'dm2',title:'ML Engineer'}]},
+      'spacex': {title:'SpaceX', desc:'Aerospace Software, Data Analyst roles.', lessons:[{id:'sx1',title:'Aerospace Software'},{id:'sx2',title:'Data Analyst'}]},
+      'siemens': {title:'Siemens', desc:'Automation Engineer, IoT Specialist roles.', lessons:[{id:'sm1',title:'Automation Engineer'},{id:'sm2',title:'IoT Specialist'}]},
+      'deloitte': {title:'Deloitte', desc:'Consultant, Data Scientist roles.', lessons:[{id:'dt1',title:'Consultant'},{id:'dt2',title:'Data Scientist'}]},
+      'capgemini': {title:'Capgemini', desc:'Cloud Architect, DevOps roles.', lessons:[{id:'cg1',title:'Cloud Architect'},{id:'cg2',title:'DevOps'}]},
+      'wipro': {title:'Wipro', desc:'Software Developer, QA Analyst roles.', lessons:[{id:'wp1',title:'Software Developer'},{id:'wp2',title:'QA Analyst'}]},
+      'hcl': {title:'HCL', desc:'Cybersecurity Analyst, Network Engineer roles.', lessons:[{id:'hcl1',title:'Cybersecurity Analyst'},{id:'hcl2',title:'Network Engineer'}]},
+      'paypal': {title:'PayPal', desc:'FinTech Developer, Security Engineer roles.', lessons:[{id:'pp1',title:'FinTech Developer'},{id:'pp2',title:'Security Engineer'}]},
+      'flipkart': {title:'Flipkart', desc:'E-commerce Developer, Data Engineer roles.', lessons:[{id:'fk1',title:'E-commerce Developer'},{id:'fk2',title:'Data Engineer'}]},
+      'byjus': {title:"Byju's", desc:'EdTech Developer, Content Engineer roles.', lessons:[{id:'bj1',title:'EdTech Developer'},{id:'bj2',title:'Content Engineer'}]},
+      'mindtree': {title:'Mindtree', desc:'Full Stack Developer, Cloud Engineer roles.', lessons:[{id:'mt1',title:'Full Stack Developer'},{id:'mt2',title:'Cloud Engineer'}]},
+      'cognizant': {title:'Cognizant', desc:'Business Analyst, Solution Architect roles.', lessons:[{id:'cz1',title:'Business Analyst'},{id:'cz2',title:'Solution Architect'}]},
+      'ltinfotech': {title:'L&T Infotech', desc:'Embedded Systems, IoT Developer roles.', lessons:[{id:'lt1',title:'Embedded Systems'},{id:'lt2',title:'IoT Developer'}]},
+      'freshworks': {title:'Freshworks', desc:'Product Manager, API Developer roles.', lessons:[{id:'fw1',title:'Product Manager'},{id:'fw2',title:'API Developer'}]},
+      'ola': {title:'Ola', desc:'Mobile App Developer, Data Scientist roles.', lessons:[{id:'ola1',title:'Mobile App Developer'},{id:'ola2',title:'Data Scientist'}]},
+      'cpp': {title:'C++ Programming', desc:'Develop high-performance applications and systems.', lessons:[{id:'cpp1',title:'C++ Basics'},{id:'cpp2',title:'OOP in C++'},{id:'cpp3',title:'C++ Project'}]},
+      'java': {title:'Java Programming', desc:'Build scalable enterprise and mobile applications.', lessons:[{id:'jv1',title:'Java Basics'},{id:'jv2',title:'Java OOP'},{id:'jv3',title:'Java Project'}]},
+      'php': {title:'PHP Development', desc:'Create dynamic web applications and backend services.', lessons:[{id:'php1',title:'PHP Basics'},{id:'php2',title:'Web Apps'},{id:'php3',title:'PHP Project'}]},
+      'sql': {title:'SQL & Databases', desc:'Manage and query relational databases efficiently.', lessons:[{id:'sql1',title:'SQL Basics'},{id:'sql2',title:'Advanced Queries'},{id:'sql3',title:'Database Project'}]},
+      'aws': {title:'AWS Cloud', desc:'Deploy and manage cloud infrastructure using AWS.', lessons:[{id:'aws1',title:'AWS Basics'},{id:'aws2',title:'Cloud Services'},{id:'aws3',title:'AWS Project'}]},
+      'gcloud': {title:'Google Cloud', desc:'Leverage Google Cloud Platform for scalable solutions.', lessons:[{id:'gc1',title:'GCP Basics'},{id:'gc2',title:'Cloud Tools'},{id:'gc3',title:'GCP Project'}]},
+      'figma': {title:'Figma Design', desc:'Design and prototype user interfaces collaboratively.', lessons:[{id:'fg1',title:'Figma Basics'},{id:'fg2',title:'Prototyping'},{id:'fg3',title:'Figma Project'}]},
+      'unity': {title:'Unity/Unreal', desc:'Develop 2D/3D games and simulations.', lessons:[{id:'un1',title:'Unity Basics'},{id:'un2',title:'Unreal Engine'},{id:'un3',title:'Game Project'}]},
+      'docker': {title:'Docker/Kubernetes', desc:'Containerize and orchestrate applications for scalability.', lessons:[{id:'dk1',title:'Docker Basics'},{id:'dk2',title:'Kubernetes'},{id:'dk3',title:'Container Project'}]},
+      'agile': {title:'Agile/Scrum', desc:'Master modern software development methodologies.', lessons:[{id:'ag1',title:'Agile Basics'},{id:'ag2',title:'Scrum Framework'},{id:'ag3',title:'Agile Project'}]},
+      'git': {title:'Git/GitHub', desc:'Version control and collaborate on code projects.', lessons:[{id:'gt1',title:'Git Basics'},{id:'gt2',title:'GitHub Collaboration'},{id:'gt3',title:'Git Project'}]},
+      'api': {title:'API Development', desc:'Design and build robust APIs for web and mobile apps.', lessons:[{id:'api1',title:'API Basics'},{id:'api2',title:'RESTful APIs'},{id:'api3',title:'API Project'}]},
+      'microservices': {title:'Microservices', desc:'Architect distributed systems for flexibility and scale.', lessons:[{id:'ms1',title:'Microservices Concepts'},{id:'ms2',title:'Service Design'},{id:'ms3',title:'Microservices Project'}]},
+      'testing': {title:'Testing Automation', desc:'Automate software testing for reliability and speed.', lessons:[{id:'ta1',title:'Testing Basics'},{id:'ta2',title:'Automation Tools'},{id:'ta3',title:'Testing Project'}]},
+      'writing': {title:'Technical Writing', desc:'Communicate complex ideas clearly and effectively.', lessons:[{id:'tw1',title:'Writing Basics'},{id:'tw2',title:'Documentation'},{id:'tw3',title:'Writing Project'}]},
+      'edge': {title:'Edge Computing', desc:'Process data closer to the source for real-time insights.', lessons:[{id:'e1',title:'Edge Concepts'},{id:'e2',title:'Applications'},{id:'e3',title:'Mini Project'}]},
+      'robotics': {title:'Robotics & Automation', desc:'Design and program intelligent robots.', lessons:[{id:'r1',title:'Robotics Basics'},{id:'r2',title:'Automation Systems'},{id:'r3',title:'Project'}]},
+      'iot': {title:'Internet of Things (IoT)', desc:'Connect devices and sensors for smart environments.', lessons:[{id:'i1',title:'IoT Fundamentals'},{id:'i2',title:'Sensor Networks'},{id:'i3',title:'IoT Project'}]},
+      'nlp': {title:'Natural Language Processing', desc:'Analyze and generate human language using AI.', lessons:[{id:'n1',title:'NLP Basics'},{id:'n2',title:'Text Analysis'},{id:'n3',title:'NLP Project'}]},
+      'cv': {title:'Computer Vision', desc:'Enable machines to interpret visual information.', lessons:[{id:'cv1',title:'Vision Concepts'},{id:'cv2',title:'Image Processing'},{id:'cv3',title:'CV Project'}]},
+      'gamedev': {title:'Game Development', desc:'Create interactive games using modern engines.', lessons:[{id:'g1',title:'Game Design'},{id:'g2',title:'Unity/Unreal'},{id:'g3',title:'Game Project'}]},
+      'embedded': {title:'Embedded Systems', desc:'Develop software for hardware devices.', lessons:[{id:'em1',title:'Embedded Basics'},{id:'em2',title:'Microcontrollers'},{id:'em3',title:'Embedded Project'}]},
+      'dataeng': {title:'Data Engineering', desc:'Build scalable data pipelines and infrastructure.', lessons:[{id:'d1',title:'Data Pipelines'},{id:'d2',title:'ETL Processes'},{id:'d3',title:'Data Project'}]},
+      'uiux': {title:'UI/UX Design', desc:'Design user interfaces and experiences.', lessons:[{id:'u1',title:'UI Principles'},{id:'u2',title:'UX Research'},{id:'u3',title:'Design Project'}]},
+      'bigdata': {title:'Big Data Analytics', desc:'Analyze massive datasets for insights.', lessons:[{id:'b1',title:'Big Data Concepts'},{id:'b2',title:'Analytics Tools'},{id:'b3',title:'Big Data Project'}]},
+      'digitalmkt': {title:'Digital Marketing', desc:'Leverage digital channels for growth.', lessons:[{id:'dm1',title:'Marketing Basics'},{id:'dm2',title:'SEO & SEM'},{id:'dm3',title:'Marketing Project'}]},
+      'fintech': {title:'FinTech', desc:'Innovate in financial technology and payments.', lessons:[{id:'f1',title:'FinTech Overview'},{id:'f2',title:'Payments Systems'},{id:'f3',title:'FinTech Project'}]},
+      'healthtech': {title:'HealthTech', desc:'Apply technology to healthcare.', lessons:[{id:'h1',title:'HealthTech Basics'},{id:'h2',title:'Medical Data'},{id:'h3',title:'HealthTech Project'}]},
+      'greentech': {title:'Green Tech', desc:'Develop sustainable technologies.', lessons:[{id:'g1',title:'Green Concepts'},{id:'g2',title:'Sustainable Design'},{id:'g3',title:'Green Project'}]},
+      'smartcities': {title:'Smart Cities', desc:'Integrate tech for efficient urban spaces.', lessons:[{id:'s1',title:'Smart City Overview'},{id:'s2',title:'Urban Tech'},{id:'s3',title:'Smart City Project'}]}
+    };
+
+    const meta = courses[courseId] || {title:courseId, desc:'Course not found', lessons:[]};
+    document.getElementById('title').textContent = meta.title;
+    document.getElementById('desc').textContent = meta.desc;
+
+    const lessonsEl = document.getElementById('lessons');
+    if(meta.lessons.length===0){ lessonsEl.innerHTML = '<div class="muted">No lessons found for this course.</div>'; }
+    meta.lessons.forEach(ls=>{
+      const el = document.createElement('div'); el.className='lesson';
+      el.innerHTML = `<div class="left"><div class="badge">${ls.title.split(' ').map(w=>w[0]||'').slice(0,2).join('').toUpperCase()}</div><div><div style="font-weight:600">${ls.title}</div><div class="muted">Lesson ID: ${ls.id}</div></div></div><div><button data-id="${ls.id}" style="background:#0b2333;border:0;color:var(--accent);padding:8px 12px;border-radius:8px;cursor:pointer">Open</button></div>`;
+      el.querySelector('button').addEventListener('click', ()=> location.href = `/lesson?course=${encodeURIComponent(courseId)}&lesson=${encodeURIComponent(ls.id)}`);
+      lessonsEl.appendChild(el);
+    });
+  </script>
+</body>
+</html>

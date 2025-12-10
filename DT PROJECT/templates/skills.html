@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skills — GenGrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050d1a;--accent1:#00ffe7;--accent2:#7c3aed;--text:#e5eeff;--muted:#94a3b8;--radius:12px;font-family:'Inter',sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:radial-gradient(circle at 20% 20%,#0a1832,#050d1a 70%);color:var(--text);min-height:100vh}
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 6%}
+    .logo{font-weight:800;font-size:20px;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;color:transparent}
+    main{max-width:1100px;margin:40px auto;padding:0 24px}
+    h1{font-size:28px;margin-bottom:8px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:20px}
+    .course{padding:18px;border-radius:14px;background:rgba(255,255,255,0.03);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .course h3{color:var(--accent1);margin-bottom:6px}
+    .course p{color:var(--muted);font-size:14px}
+    .meta{color:var(--muted);font-size:13px;margin-top:8px}
+    .tags{margin-top:10px}
+    .tag{display:inline-block;background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted);margin-right:6px}
+    .actions{margin-top:12px;display:flex;gap:8px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#01060e;font-weight:700;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">GEN GRADE</div>
+    <nav><a href="/mycourses" style="color:var(--muted);text-decoration:none">Dashboard</a></nav>
+  </header>
+
+  <main>
+    <h1>Skills — Paths</h1>
+    <p class="note" style="color:var(--muted);margin-top:6px">Pick a skills track to practice with guided projects, mentorship and assessments.</p>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <script>
+    if(!localStorage.getItem('gengrade_user')){ location.href='/login?next=' + encodeURIComponent(window.location.pathname); }
+    const skills = [
+      {id:'projects', title:'Projects Path', desc:'Guided projects to build practical skills.', duration:'4 weeks', instructor:'Priya S.', lessons:4, tags:['Projects','Hands-on']},
+      {id:'mentorship', title:'Mentorship', desc:'1-on-1 mentor sessions and reviews.', duration:'Ongoing', instructor:'Mentor Pool', lessons:0, tags:['Mentor','Feedback']},
+      {id:'analytics', title:'Analytics', desc:'Track progress and readiness.', duration:'2 weeks', instructor:'Data Team', lessons:3, tags:['Metrics','Progress']},
+      {id:'cpp', title:'C++ Programming', desc:'Develop high-performance applications and systems.', duration:'5 weeks', instructor:'Ms. T. Verma', lessons:3, tags:['C++','Programming']},
+      {id:'java', title:'Java Programming', desc:'Build scalable enterprise and mobile applications.', duration:'6 weeks', instructor:'Mr. R. Singh', lessons:3, tags:['Java','Programming']},
+      {id:'php', title:'PHP Development', desc:'Create dynamic web applications and backend services.', duration:'4 weeks', instructor:'Ms. S. Kapoor', lessons:3, tags:['PHP','Web']},
+      {id:'sql', title:'SQL & Databases', desc:'Manage and query relational databases efficiently.', duration:'4 weeks', instructor:'Mr. D. Joshi', lessons:3, tags:['SQL','Databases']},
+      {id:'aws', title:'AWS Cloud', desc:'Deploy and manage cloud infrastructure using AWS.', duration:'5 weeks', instructor:'Ms. L. George', lessons:3, tags:['AWS','Cloud']},
+      {id:'gcloud', title:'Google Cloud', desc:'Leverage Google Cloud Platform for scalable solutions.', duration:'5 weeks', instructor:'Mr. P. Rao', lessons:3, tags:['Google Cloud','Cloud']},
+      {id:'figma', title:'Figma Design', desc:'Design and prototype user interfaces collaboratively.', duration:'3 weeks', instructor:'Ms. J. Patel', lessons:3, tags:['Figma','Design']},
+      {id:'unity', title:'Unity/Unreal', desc:'Develop 2D/3D games and simulations.', duration:'6 weeks', instructor:'Mr. S. Lee', lessons:3, tags:['Unity','Unreal']},
+      {id:'docker', title:'Docker/Kubernetes', desc:'Containerize and orchestrate applications for scalability.', duration:'5 weeks', instructor:'Ms. A. Nair', lessons:3, tags:['Docker','Kubernetes']},
+      {id:'agile', title:'Agile/Scrum', desc:'Master modern software development methodologies.', duration:'4 weeks', instructor:'Mr. V. Kumar', lessons:3, tags:['Agile','Scrum']},
+      {id:'git', title:'Git/GitHub', desc:'Version control and collaborate on code projects.', duration:'3 weeks', instructor:'Ms. F. Das', lessons:3, tags:['Git','GitHub']},
+      {id:'api', title:'API Development', desc:'Design and build robust APIs for web and mobile apps.', duration:'4 weeks', instructor:'Mr. K. Jain', lessons:3, tags:['API','Development']},
+      {id:'microservices', title:'Microservices', desc:'Architect distributed systems for flexibility and scale.', duration:'5 weeks', instructor:'Ms. S. Pillai', lessons:3, tags:['Microservices','Architecture']},
+      {id:'testing', title:'Testing Automation', desc:'Automate software testing for reliability and speed.', duration:'4 weeks', instructor:'Mr. R. Mehta', lessons:3, tags:['Testing','Automation']},
+      {id:'writing', title:'Technical Writing', desc:'Communicate complex ideas clearly and effectively.', duration:'3 weeks', instructor:'Ms. N. Gupta', lessons:3, tags:['Writing','Documentation']},
+      {id:'healthtech', title:'HealthTech', desc:'Apply technology to healthcare.', duration:'4 weeks', instructor:'Dr. N. Menon', lessons:3, tags:['Health','Tech']},
+      {id:'greentech', title:'Green Tech', desc:'Develop sustainable technologies.', duration:'4 weeks', instructor:'Ms. R. Thomas', lessons:3, tags:['Green','Sustainability']},
+      {id:'smartcities', title:'Smart Cities', desc:'Integrate tech for efficient urban spaces.', duration:'5 weeks', instructor:'Dr. S. Pillai', lessons:3, tags:['Smart','Cities']}
+    ];
+    const grid = document.getElementById('grid');
+    skills.forEach(s=>{
+      const el = document.createElement('div'); el.className='course'; el.dataset.id=s.id;
+      el.innerHTML = `
+        <h3>${s.title}</h3>
+        <p>${s.desc}</p>
+        <div class="meta">Instructor: ${s.instructor} • ${s.duration} • ${s.lessons} lessons</div>
+        <div class="tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="actions">
+          <button class="btn" data-open="${s.id}">Open</button>
+          <button class="btn ghost" data-enroll="${s.id}">Enroll</button>
+        </div>
+      `;
+      el.querySelector('[data-open]').addEventListener('click',(ev)=>{ev.stopPropagation(); location.href = `/course?course=${encodeURIComponent(s.id)}`});
+      el.querySelector('[data-enroll]').addEventListener('click',(ev)=>{ev.stopPropagation(); localStorage.setItem('gengrade_enrolled_'+s.id,'true'); alert('Enrolled in '+s.title)});
+      el.addEventListener('click', ()=> location.href = `/course?course=${encodeURIComponent(s.id)}`);
+      grid.appendChild(el);
+    });
+  </script>
+</body>
+</html>

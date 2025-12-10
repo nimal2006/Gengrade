@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career — GenGrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050d1a;--accent1:#00ffe7;--accent2:#7c3aed;--text:#e5eeff;--muted:#94a3b8;--radius:12px;font-family:'Inter',sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:radial-gradient(circle at 20% 20%,#0a1832,#050d1a 70%);color:var(--text);min-height:100vh}
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 6%}
+    .logo{font-weight:800;font-size:20px;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;color:transparent}
+    main{max-width:1100px;margin:40px auto;padding:0 24px}
+    h1{font-size:28px;margin-bottom:8px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:20px}
+    .course{padding:18px;border-radius:14px;background:rgba(255,255,255,0.03);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .course h3{color:var(--accent1);margin-bottom:6px}
+    .course p{color:var(--muted);font-size:14px}
+    .meta{color:var(--muted);font-size:13px;margin-top:8px}
+    .tags{margin-top:10px}
+    .tag{display:inline-block;background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted);margin-right:6px}
+    .actions{margin-top:12px;display:flex;gap:8px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#01060e;font-weight:700;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">GEN GRADE</div>
+    <nav><a href="/mycourses" style="color:var(--muted);text-decoration:none">Dashboard</a></nav>
+  </header>
+
+  <main>
+    <h1>Career — Placement Paths</h1>
+    <p class="note" style="color:var(--muted);margin-top:6px">Career tracks include mock interviews, resume reviews and job matching.</p>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <script>
+    if(!localStorage.getItem('gengrade_user')){ location.href='/login?next=' + encodeURIComponent(window.location.pathname); }
+    const items = [
+      {id:'placement', title:'Placement Prep', desc:'Mock tests, interviews and soft skills.', duration:'4 weeks', instructor:'Career Team', lessons:5, tags:['Interviews','Tests']},
+      {id:'jobalerts', title:'Job Alerts', desc:'Personalized job recommendations.', duration:'Ongoing', instructor:'Matching Service', lessons:0, tags:['Jobs','Alerts']},
+      {id:'resume', title:'Resume Boost', desc:'AI-based resume optimization.', duration:'1 week', instructor:'Resume AI', lessons:2, tags:['Resume','AI']},
+      {id:'deepmind', title:'Google DeepMind', desc:'AI Researcher, ML Engineer roles.', duration:'6 weeks', instructor:'DeepMind Team', lessons:2, tags:['AI','ML']},
+      {id:'spacex', title:'SpaceX', desc:'Aerospace Software, Data Analyst roles.', duration:'6 weeks', instructor:'SpaceX Careers', lessons:2, tags:['Aerospace','Data']},
+      {id:'siemens', title:'Siemens', desc:'Automation Engineer, IoT Specialist roles.', duration:'5 weeks', instructor:'Siemens Careers', lessons:2, tags:['Automation','IoT']},
+      {id:'deloitte', title:'Deloitte', desc:'Consultant, Data Scientist roles.', duration:'5 weeks', instructor:'Deloitte Careers', lessons:2, tags:['Consultant','Data']},
+      {id:'capgemini', title:'Capgemini', desc:'Cloud Architect, DevOps roles.', duration:'5 weeks', instructor:'Capgemini Careers', lessons:2, tags:['Cloud','DevOps']},
+      {id:'wipro', title:'Wipro', desc:'Software Developer, QA Analyst roles.', duration:'5 weeks', instructor:'Wipro Careers', lessons:2, tags:['Software','QA']},
+      {id:'hcl', title:'HCL', desc:'Cybersecurity Analyst, Network Engineer roles.', duration:'5 weeks', instructor:'HCL Careers', lessons:2, tags:['Cybersecurity','Network']},
+      {id:'paypal', title:'PayPal', desc:'FinTech Developer, Security Engineer roles.', duration:'5 weeks', instructor:'PayPal Careers', lessons:2, tags:['FinTech','Security']},
+      {id:'flipkart', title:'Flipkart', desc:'E-commerce Developer, Data Engineer roles.', duration:'5 weeks', instructor:'Flipkart Careers', lessons:2, tags:['E-commerce','Data']},
+      {id:'byjus', title:"Byju's", desc:'EdTech Developer, Content Engineer roles.', duration:'5 weeks', instructor:"Byju's Careers", lessons:2, tags:['EdTech','Content']},
+      {id:'mindtree', title:'Mindtree', desc:'Full Stack Developer, Cloud Engineer roles.', duration:'5 weeks', instructor:'Mindtree Careers', lessons:2, tags:['Full Stack','Cloud']},
+      {id:'cognizant', title:'Cognizant', desc:'Business Analyst, Solution Architect roles.', duration:'5 weeks', instructor:'Cognizant Careers', lessons:2, tags:['Business','Solution']},
+      {id:'ltinfotech', title:'L&T Infotech', desc:'Embedded Systems, IoT Developer roles.', duration:'5 weeks', instructor:'L&T Careers', lessons:2, tags:['Embedded','IoT']},
+      {id:'freshworks', title:'Freshworks', desc:'Product Manager, API Developer roles.', duration:'5 weeks', instructor:'Freshworks Careers', lessons:2, tags:['Product','API']},
+      {id:'ola', title:'Ola', desc:'Mobile App Developer, Data Scientist roles.', duration:'5 weeks', instructor:'Ola Careers', lessons:2, tags:['Mobile','Data']}
+    ];
+    const grid = document.getElementById('grid');
+    items.forEach(s=>{
+      const el = document.createElement('div'); el.className='course'; el.dataset.id=s.id;
+      el.innerHTML = `
+        <h3>${s.title}</h3>
+        <p>${s.desc}</p>
+        <div class="meta">Provider: ${s.instructor} • ${s.duration} • ${s.lessons} modules</div>
+        <div class="tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="actions">
+          <button class="btn" data-open="${s.id}">Open</button>
+          <button class="btn ghost" data-enroll="${s.id}">Enroll</button>
+        </div>
+      `;
+      el.querySelector('[data-open]').addEventListener('click',(ev)=>{ev.stopPropagation(); location.href = `/course?course=${encodeURIComponent(s.id)}`});
+      el.querySelector('[data-enroll]').addEventListener('click',(ev)=>{ev.stopPropagation(); localStorage.setItem('gengrade_enrolled_'+s.id,'true'); alert('Enrolled in '+s.title)});
+      el.addEventListener('click', ()=> location.href = `/course?course=${encodeURIComponent(s.id)}`);
+      grid.appendChild(el);
+    });
+  </script>
+</body>
+</html>

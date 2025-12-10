@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learn — GenGrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050d1a;--accent1:#00ffe7;--accent2:#7c3aed;--text:#e5eeff;--muted:#94a3b8;--radius:12px;font-family:'Inter',sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:radial-gradient(circle at 20% 20%,#0a1832,#050d1a 70%);color:var(--text);min-height:100vh}
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 6%}
+    .logo{font-weight:800;font-size:20px;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;color:transparent}
+    main{max-width:1100px;margin:40px auto;padding:0 24px}
+    h1{font-size:28px;margin-bottom:8px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:20px}
+    .course{padding:18px;border-radius:14px;background:rgba(255,255,255,0.03);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .course h3{color:var(--accent1);margin-bottom:6px}
+    .course p{color:var(--muted);font-size:14px}
+    .meta{color:var(--muted);font-size:13px;margin-top:8px}
+    .tags{margin-top:10px}
+    .tag{display:inline-block;background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted);margin-right:6px}
+    .actions{margin-top:12px;display:flex;gap:8px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#01060e;font-weight:700;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+    .note{color:var(--muted);margin-top:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">GEN GRADE</div>
+    <nav><a href="/mycourses" style="color:var(--muted);text-decoration:none">Dashboard</a></nav>
+  </header>
+
+  <main>
+    <h1>Learn — Courses</h1>
+    <p class="note">Click a course card or use the <strong>Open</strong> button to view lessons. Use <strong>Enroll</strong> to join the track.</p>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <script>
+    // require login
+    const user = localStorage.getItem('gengrade_user');
+    if(!user){ location.href = '/login?next=' + encodeURIComponent(window.location.pathname); }
+    const courses = [
+      {id:'genai', title:'Generative AI Projects', desc:'Build GenAI applications end-to-end.', duration:'6 weeks', difficulty:'Intermediate', instructor:'Dr. Asha R.', lessons:3, tags:['AI','Projects','ML']},
+      {id:'webdev', title:'Web Development Bootcamp', desc:'Full-stack web apps, APIs, deployment.', duration:'8 weeks', difficulty:'Beginner', instructor:'Samuel P.', lessons:6, tags:['HTML','CSS','JS']},
+      {id:'cyber', title:'Cybersecurity Essentials', desc:'Protect systems from modern threats.', duration:'5 weeks', difficulty:'Beginner-Intermediate', instructor:'Ravi K.', lessons:4, tags:['Security','Networking']},
+      {id:'edge', title:'Edge Computing', desc:'Process data closer to the source for real-time insights.', duration:'4 weeks', difficulty:'Intermediate', instructor:'Dr. S. Kumar', lessons:3, tags:['Edge','IoT']},
+      {id:'robotics', title:'Robotics & Automation', desc:'Design and program intelligent robots.', duration:'6 weeks', difficulty:'Intermediate', instructor:'Dr. R. Mehta', lessons:3, tags:['Robotics','Automation']},
+      {id:'iot', title:'Internet of Things (IoT)', desc:'Connect devices and sensors for smart environments.', duration:'5 weeks', difficulty:'Intermediate', instructor:'Dr. L. Singh', lessons:3, tags:['IoT','Sensors']},
+      {id:'nlp', title:'Natural Language Processing', desc:'Analyze and generate human language using AI.', duration:'5 weeks', difficulty:'Advanced', instructor:'Dr. P. Rao', lessons:3, tags:['NLP','AI']},
+      {id:'cv', title:'Computer Vision', desc:'Enable machines to interpret visual information.', duration:'5 weeks', difficulty:'Advanced', instructor:'Dr. T. Das', lessons:3, tags:['Vision','AI']},
+      {id:'gamedev', title:'Game Development', desc:'Create interactive games using modern engines.', duration:'6 weeks', difficulty:'Intermediate', instructor:'Ms. J. Lee', lessons:3, tags:['Games','Unity']},
+      {id:'embedded', title:'Embedded Systems', desc:'Develop software for hardware devices.', duration:'4 weeks', difficulty:'Intermediate', instructor:'Dr. V. Nair', lessons:3, tags:['Embedded','Hardware']},
+      {id:'dataeng', title:'Data Engineering', desc:'Build scalable data pipelines and infrastructure.', duration:'5 weeks', difficulty:'Advanced', instructor:'Ms. S. Patel', lessons:3, tags:['Data','ETL']},
+      {id:'uiux', title:'UI/UX Design', desc:'Design user interfaces and experiences.', duration:'4 weeks', difficulty:'Beginner', instructor:'Ms. F. Gupta', lessons:3, tags:['UI','UX']},
+      {id:'bigdata', title:'Big Data Analytics', desc:'Analyze massive datasets for insights.', duration:'5 weeks', difficulty:'Advanced', instructor:'Dr. M. Roy', lessons:3, tags:['Big Data','Analytics']},
+      {id:'digitalmkt', title:'Digital Marketing', desc:'Leverage digital channels for growth.', duration:'4 weeks', difficulty:'Beginner', instructor:'Ms. K. Sharma', lessons:3, tags:['Marketing','Digital']},
+      {id:'fintech', title:'FinTech', desc:'Innovate in financial technology and payments.', duration:'5 weeks', difficulty:'Intermediate', instructor:'Mr. A. Jain', lessons:3, tags:['Finance','Tech']},
+      {id:'healthtech', title:'HealthTech', desc:'Apply technology to healthcare.', duration:'4 weeks', difficulty:'Intermediate', instructor:'Dr. N. Menon', lessons:3, tags:['Health','Tech']},
+      {id:'greentech', title:'Green Tech', desc:'Develop sustainable technologies.', duration:'4 weeks', difficulty:'Beginner', instructor:'Ms. R. Thomas', lessons:3, tags:['Green','Sustainability']},
+      {id:'smartcities', title:'Smart Cities', desc:'Integrate tech for efficient urban spaces.', duration:'5 weeks', difficulty:'Intermediate', instructor:'Dr. S. Pillai', lessons:3, tags:['Smart','Cities']}
+    ];
+
+    const grid = document.getElementById('grid');
+    courses.forEach(c=>{
+      const el = document.createElement('div'); el.className='course'; el.dataset.id=c.id;
+      el.innerHTML = `
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <div class="meta">Instructor: ${c.instructor} • ${c.duration} • ${c.difficulty} • ${c.lessons} lessons</div>
+        <div class="tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="actions">
+          <button class="btn" data-open="${c.id}">Open</button>
+          <button class="btn ghost" data-enroll="${c.id}">Enroll</button>
+        </div>
+      `;
+
+      el.querySelector('[data-open]').addEventListener('click', (ev)=>{ ev.stopPropagation(); location.href = `/course?course=${encodeURIComponent(c.id)}`; });
+      el.querySelector('[data-enroll]').addEventListener('click', (ev)=>{ ev.stopPropagation(); localStorage.setItem('gengrade_enrolled_'+c.id, 'true'); alert('Enrolled in ' + c.title); });
+      el.addEventListener('click', ()=> location.href = `/course?course=${encodeURIComponent(c.id)}`);
+      grid.appendChild(el);
+    });
+  </script>
+</body>
+</html>

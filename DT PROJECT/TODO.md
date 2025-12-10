@@ -1,0 +1,7 @@
+- [x] Remove nav from header (header never had nav; nav moved to hero-left)
+- [x] Modify hero section HTML to have left and right divs
+- [x] Update hero CSS for row layout
+- [x] Add hero-left with logo and nav links
+- [x] Add hero-right with slogan, desc, button
+- [x] Add new About GEN GRADE section after hero
+- [x] Test layout in browser
